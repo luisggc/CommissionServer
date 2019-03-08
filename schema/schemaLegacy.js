@@ -63,21 +63,24 @@ const EventType = new GraphQLObjectType({
 	fields: () => ({
 		id: { type: GraphQLID },
 		name: { type: GraphQLString },
-		host: { type: GraphQLString },
 		description: { type: GraphQLString },
-		// userId: { type: GraphQLString },
-		user: {
-			type: UserType,
-			resolve(parent, args) {
-				return User.findById(parent.userId)
-				// return _.find(users, { id: parent.id })
-			}
-		},
+		location: { type: GraphQLString },
+		host: { type: GraphQLString },
 		assistances: {
 			type: new GraphQLList(AssistanceType),
 			resolve(parent, args) {
 				return Assistance.find({ eventId: parent.id })
 				// return assistances.filter(assistance => assistance.eventId == parent.id)
+			}
+		},
+		datetimeStart: { type: GraphQLString },
+		duration: { type: GraphQLInt },
+		recurrence: { type: GraphQLString },
+		user: {
+			type: UserType,
+			resolve(parent, args) {
+				return User.findById(parent.userId)
+				// return _.find(users, { id: parent.id })
 			}
 		}
 	})
@@ -155,7 +158,11 @@ const Mutation = new GraphQLObjectType({
 			args: {
 				name: { type: new GraphQLNonNull(GraphQLString) },
 				description: { type: new GraphQLNonNull(GraphQLString) },
+				location: { type: new GraphQLNonNull(GraphQLString) },
 				host: { type: new GraphQLNonNull(GraphQLString) },
+				datetimeStart: { type: new GraphQLNonNull(GraphQLString) },
+				duration: { type: new GraphQLNonNull(GraphQLInt) },
+				recurrence: { type: new GraphQLNonNull(GraphQLString) },
 				userId: { type: new GraphQLNonNull(GraphQLString) }
 			},
 			resolve(parent, args) {

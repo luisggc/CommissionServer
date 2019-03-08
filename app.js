@@ -1,15 +1,16 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import schema from './schema/schema'
+import schema from './schema'
+import resolvers from './resolvers'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import config from './config/development/secrets'
 
 const app = express()
 
 // allow cross-origin requests
 app.use(cors())
-
-mongoose.connect(process.env.REACT_APP_MONGOOSE_DB_URL)
+mongoose.connect(config.database.mongodb)
 
 
 mongoose.connection.once('open', () => {
@@ -19,6 +20,7 @@ app.use(
 	'/graphql',
 	graphqlHTTP({
 		schema,
+		rootValue: resolvers,
 		graphiql: true
 	})
 )
