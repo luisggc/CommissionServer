@@ -4,14 +4,12 @@ const schema = require('./schema')
 const resolvers = require('./resolvers')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const config = require('./config/development/secrets')
 
 const app = express()
 
 // allow cross-origin requests
 app.use(cors())
-mongoose.connect(config.database.mongodb)
-
+mongoose.connect(process.env.MONGOOSE_DB_URL, { useNewUrlParser: true })
 
 mongoose.connection.once('open', () => {
 	console.log('connected')
