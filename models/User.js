@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
+
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -8,4 +9,4 @@ const userSchema = new Schema({
 	aim: String
 })
 
-export default mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)

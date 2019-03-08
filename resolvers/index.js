@@ -1,4 +1,4 @@
-import queries from './queries'
-import mutations from './mutations'
+const queries = require('./queries')
+const mutations = require('./mutations')
 
-export default Object.assign(queries, mutations)
+module.exports = Object.assign(queries, mutations)

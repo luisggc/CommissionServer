@@ -1,6 +1,6 @@
-import { buildSchema } from 'graphql'
+const { buildSchema } = require('graphql')
 
-export default buildSchema(`
+const Schema = buildSchema(`
 	type Assistance {
 		_id: ID!
 		userId: ID!
@@ -52,3 +52,5 @@ export default buildSchema(`
 	}
 
 `)
+
+module.exports = Schema

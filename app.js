@@ -1,10 +1,10 @@
-import express from 'express'
-import graphqlHTTP from 'express-graphql'
-import schema from './schema'
-import resolvers from './resolvers'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import config from './config/development/secrets'
+const express = require('express')
+const graphqlHTTP = require('express-graphql')
+const schema = require('./schema')
+const resolvers = require('./resolvers')
+const mongoose = require('mongoose')
+const cors = require('cors')
+const config = require('./config/development/secrets')
 
 const app = express()
 

@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
+
 const Schema = mongoose.Schema
 
 const assistanceSchema = new Schema({
@@ -7,4 +8,4 @@ const assistanceSchema = new Schema({
 	type: String,
 })
 
-export default mongoose.model('Assistance', assistanceSchema)
+module.exports = mongoose.model('Assistance', assistanceSchema)

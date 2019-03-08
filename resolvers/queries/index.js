@@ -1,6 +1,6 @@
-import User from '../../models/User'
-import Event from '../../models/Event'
-import Assistance from '../../models/Assistance'
+const User = require('../../models/User')
+const Event = require('../../models/Event')
+const Assistance = require('../../models/Assistance')
 
 const queries = {
 	user: (args) => {
@@ -23,4 +23,4 @@ const queries = {
 	}
 }
 
-export default queries
+module.exports = queries

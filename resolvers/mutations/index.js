@@ -1,8 +1,8 @@
-import User from '../../models/User'
-import Event from '../../models/Event'
-import Assistance from '../../models/Assistance'
+const User = require('../../models/User')
+const Event = require('../../models/Event')
+const Assistance = require('../../models/Assistance')
 
-export default {
+module.exports = {
 	addUser: (args) => {
 		let user = new User(args)
 		return user.save()
