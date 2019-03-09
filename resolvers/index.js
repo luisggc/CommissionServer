@@ -1,4 +1,6 @@
-const queries = require('./queries')
-const mutations = require('./mutations')
+const userResolver = require('./user')
+const eventResolver = require('./event')
+const assistanceResolver = require('./assistance')
+const authResolver = require('./auth')
 
-module.exports = { ...queries, ...mutations }
+module.exports = { ...userResolver, ...eventResolver, ...assistanceResolver, ...authResolver }

@@ -1,15 +1,18 @@
 const userType = `
     type User {
         _id: ID!
+        assistances: [Assistance!]!
+        birthDate: String!
+        description: String!
+        email: String!
+        aim: String!
+        events: [Event!]!
         name: String!
-        age: Int!
-        events: [Event]
-        assistances: [Assistance]
     }
 `
 
 const userMutation = `
-	addUser(name: String!, age: Int!, description: String!, aim: String!) : [User]
+	
 
 `
 

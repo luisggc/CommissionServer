@@ -1,20 +1,31 @@
 const eventType = `
     type Event {
         _id: ID!
-        name: String!
+        assistances: [Assistance!]!
+        creator: User
         description: String!
-        location: String!
+        eventDate: String!
         host: String!
-        assistances: [Assistance]
-        datetimeStart: String!
-        duration: Int!
-        recurrence: String!
-        users: [User]
+        location: String!
+        name: String!
+        participants: [User!]!
+        recurrence: Int!
+
+        createdAt: String!
+        updatedAt: String!
     }
 `
 
 const eventMutation = `
-    addEvent(name: String!, description: String!, location: String!, host: String!) : [Event]
+    addEvent(
+        creator: ID!
+        description: String!
+        eventDate: String!
+        host: String!
+        location: String!
+        name: String!
+        recurrence: Int!
+    ) : [Event]
 `
 
 const eventQuery = `
