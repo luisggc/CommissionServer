@@ -10,8 +10,8 @@ const userSchema = new Schema(
 		name: { type: String, required: true },
 		password: { type: String, required: true },
 		aim: { type: String, max: 26 },
-		createdEvents: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
-		createdAssistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance' }],
+		createdEvents: [{ type: Schema.Types.ObjectId, ref: 'Event', autopopulate: true }],
+		createdAssistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance', autopopulate: true }],
 		avatar: String,
 		lastLocation: {
 			type: { type: String },

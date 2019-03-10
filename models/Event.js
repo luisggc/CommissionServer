@@ -10,7 +10,7 @@ const eventSchema = new Schema(
 		host: { type: String },
 		name: { type: String, required: true },
 		recurrence: { type: Number },
-		assistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance' }],
+		assistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance', autopopulate: true }],
 		creator: { type: Schema.Types.ObjectId, ref: 'User', autopopulate: true },
 		location: {
 			type: {
@@ -19,7 +19,7 @@ const eventSchema = new Schema(
 			},
 			coordinates: {
 				type: [Number],
-				createIndexes: '2dsphere',
+				// createIndexes: '2dsphere',
 				required: true
 			}
 		},
@@ -27,7 +27,7 @@ const eventSchema = new Schema(
 	},
 	{ timestamps: true }
 )
-
+eventSchema.index({ location: '2dsphere' });
 eventSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('Event', eventSchema)

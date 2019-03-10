@@ -8,26 +8,31 @@ const eventModifier = async singleEvent => {
 }
 
 const eventResolver = {
-	event: args => {
-		return Event.findById(args.id)
+	event: async args => {
+		const event = await Event.findById(args._id)
+		return event ? eventModifier(event) : event
 	},
 	events: async ({ location, radius }) => {
 		let events
-		const radiusGeometry = radius ? radius : 40000
+		const maxDistance = radius ? {$maxDistance: radius} : {}
+		
+
+
 		if (!location) {
 			events = await Event.find({})
 		} else {
 			events = await Event.find({
 				location: {
 					$near: {
-						$maxDistance: radiusGeometry,
 						$geometry: {
 							type: 'Point',
 							coordinates: location
-						}
+						},
+						...maxDistance
 					}
 				}
 			})
+
 			events = events.map(event => {
 				return {
 					...event,

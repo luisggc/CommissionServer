@@ -8,6 +8,7 @@ const eventType = `
 
     type Event {
         _id: ID!
+        avatar: String
         assistances: [Assistance!]!
         creator: User
         description: String!

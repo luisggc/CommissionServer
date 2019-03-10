@@ -2,7 +2,7 @@ const Assistance = require('../models/Assistance')
 
 const assistanceResolver = {
 	assistance: args => {
-		return Assistance.findById(args.id)
+		return Assistance.findById(args._id)
 	},
 	assistances: () => {
 		return Assistance.find({})

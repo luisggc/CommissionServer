@@ -1,10 +1,11 @@
-require('dotenv').load();
+require('dotenv').load()
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema')
 const resolvers = require('./resolvers')
 const mongoose = require('mongoose')
 const cors = require('cors')
+mongoose.set('useCreateIndex', true)
 
 const app = express()
 
