@@ -1,7 +1,7 @@
 const eventType = `
 
     type Location {
-        value: [Float!]!
+        coordinates: [Float!]!
         longitude: Float!
         latitude: Float!
     }
@@ -18,6 +18,7 @@ const eventType = `
         name: String!
         participants: [User!]!
         recurrence: Int
+        distance: Int
         createdAt: String!
         updatedAt: String!
     }
@@ -25,6 +26,7 @@ const eventType = `
 
 const eventMutation = `
     addEvent(
+        avatar: String
         creator: ID!
         description: String!
         duration: Int!

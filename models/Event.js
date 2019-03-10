@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const eventSchema = new Schema(
 	{
+		avatar: String,
 		description: { type: String, required: true },
 		duration: { type: Number, required: true },
 		eventDate: { type: Date, required: true },
@@ -10,7 +11,7 @@ const eventSchema = new Schema(
 		name: { type: String, required: true },
 		recurrence: { type: Number },
 		assistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance' }],
-		creator: { type: Schema.Types.ObjectId, ref: 'User' },
+		creator: { type: Schema.Types.ObjectId, ref: 'User', autopopulate: true },
 		location: {
 			type: {
 				type: String,
@@ -26,5 +27,7 @@ const eventSchema = new Schema(
 	},
 	{ timestamps: true }
 )
+
+eventSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('Event', eventSchema)

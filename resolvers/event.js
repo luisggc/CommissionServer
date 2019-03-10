@@ -1,9 +1,10 @@
 const Event = require('../models/Event')
 const { dateFormation } = require('../helpers/date')
-const { locationToLatLong, convertLatLongtoDB } = require('../helpers/geolocation')
+const { locationToLatLong, convertLatLongtoDB, getDistance } = require('../helpers/geolocation')
 
-const eventModifier = event => {
-	return dateFormation(locationToLatLong(event._doc))
+const eventModifier = async singleEvent => {
+	// const events = singleEvent.populate('creator')
+	return dateFormation(locationToLatLong(singleEvent._doc))
 }
 
 const eventResolver = {
@@ -11,24 +12,33 @@ const eventResolver = {
 		return Event.findById(args.id)
 	},
 	events: async ({ location, radius }) => {
-		console.log('entrooooou')
 		let events
+		const radiusGeometry = radius ? radius : 40000
 		if (!location) {
 			events = await Event.find({})
 		} else {
 			events = await Event.find({
 				location: {
 					$near: {
+						$maxDistance: radiusGeometry,
 						$geometry: {
 							type: 'Point',
-							coordinates: location,
-						},
-						$maxDistance: "0.1",
-					},
+							coordinates: location
+						}
+					}
+				}
+			})
+			events = events.map(event => {
+				return {
+					...event,
+					_doc: {
+						...event._doc,
+						distance: getDistance(location, event._doc.location.coordinates)
+					}
 				}
 			})
 		}
-		return events.map(eventModifier)
+		return await events.map(eventModifier)
 	},
 	addEvent: async args => {
 		let event = new Event(convertLatLongtoDB(args))

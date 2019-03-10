@@ -11,4 +11,6 @@ const assistanceSchema = new Schema(
 	{ timestamps: true }
 )
 
+assistanceSchema.plugin(require('mongoose-autopopulate'))
+
 module.exports = mongoose.model('Assistance', assistanceSchema)

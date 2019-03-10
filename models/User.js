@@ -12,7 +12,7 @@ const userSchema = new Schema(
 		aim: { type: String, max: 26 },
 		createdEvents: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
 		createdAssistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance' }],
-		image: String,
+		avatar: String,
 		lastLocation: {
 			type: { type: String },
 			coordinates: [Number]
@@ -20,5 +20,7 @@ const userSchema = new Schema(
 	},
 	{ timestamps: true }
 )
+
+userSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('User', userSchema)

@@ -1,8 +1,8 @@
 var faker = require('faker/locale/pt_BR')
 const { request } = require('graphql-request')
 
-const run = async (contUser) => {
-	const addEvent = () => {
+const addUsers = async contUser => {
+	const addUser = () => {
 		let date = faker.date.past(30)
 		let {
 			name,
@@ -27,12 +27,13 @@ const run = async (contUser) => {
             avatar: "${avatar}"
         ){
             _id
-		}`
-
+		}}`
 	}
+	let usersId = []
 	for (i = 0; i < contUser; i++) {
-		await request(process.env.SERVER_URL, signup())
+		userAll = await request(process.env.SERVER_URL, addUser())
+		usersId.push(userAll.signup._id)
 	}
+	return usersId
 }
-
-modules.export = run
+module.exports = addUsers
