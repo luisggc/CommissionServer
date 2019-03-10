@@ -12,9 +12,10 @@ const userSchema = new Schema(
 		aim: { type: String, max: 26 },
 		createdEvents: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
 		createdAssistances: [{ type: Schema.Types.ObjectId, ref: 'Assistance' }],
+		image: String,
 		lastLocation: {
-			latitude: { type: Number },
-			longitude: { type: Number }
+			type: { type: String },
+			coordinates: [Number]
 		}
 	},
 	{ timestamps: true }

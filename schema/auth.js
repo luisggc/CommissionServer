@@ -9,6 +9,7 @@ const authType = `
 const authMutation = `
     signup(
         aim: String
+        avatar: String
         birthDate: String!
         description: String!
         email: String!

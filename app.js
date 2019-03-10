@@ -1,3 +1,4 @@
+require('dotenv').load();
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema')
@@ -10,10 +11,10 @@ const app = express()
 // allow cross-origin requests
 app.use(cors())
 mongoose.connect(process.env.MONGOOSE_DB_URL, { useNewUrlParser: true })
-
-mongoose.connection.once('open', () => {
+mongoose.connection.on('open', () => {
 	console.log('connected')
 })
+
 app.use(
 	'/graphql',
 	graphqlHTTP({
